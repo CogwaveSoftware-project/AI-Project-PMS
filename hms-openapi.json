@@ -1,0 +1,7818 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "FrontOfficeApplication",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/CheckIn/GetActiveCheckInList": {
+      "get": {
+        "tags": [
+          "CheckIn"
+        ],
+        "parameters": [
+          {
+            "name": "propertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActiveCheckInDtoIReadOnlyListApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActiveCheckInDtoIReadOnlyListApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActiveCheckInDtoIReadOnlyListApiResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/CheckIn/CreateCheckInDetail": {
+      "post": {
+        "tags": [
+          "CheckIn"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CheckInRequestModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CheckInRequestModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CheckInRequestModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringApiResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/FileStorage/GetFileStorageList": {
+      "get": {
+        "tags": [
+          "FileStorage"
+        ],
+        "parameters": [
+          {
+            "name": "TableCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/FileStorage/GetFileStorageById": {
+      "get": {
+        "tags": [
+          "FileStorage"
+        ],
+        "parameters": [
+          {
+            "name": "FileId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "TableCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/FileStorage/UploadImageFile": {
+      "post": {
+        "tags": [
+          "FileStorage"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ReferenceCode": {
+                    "type": "string"
+                  },
+                  "ReferenceType": {
+                    "type": "string"
+                  },
+                  "FileCategory": {
+                    "type": "string"
+                  },
+                  "File": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "TableCode": {
+                    "type": "string"
+                  },
+                  "UserCode": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "IPAddress": {
+                    "type": "string"
+                  },
+                  "PropertyCode": {
+                    "type": "string"
+                  },
+                  "BranchCode": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "ReferenceCode": {
+                  "style": "form"
+                },
+                "ReferenceType": {
+                  "style": "form"
+                },
+                "FileCategory": {
+                  "style": "form"
+                },
+                "File": {
+                  "style": "form"
+                },
+                "TableCode": {
+                  "style": "form"
+                },
+                "UserCode": {
+                  "style": "form"
+                },
+                "IPAddress": {
+                  "style": "form"
+                },
+                "PropertyCode": {
+                  "style": "form"
+                },
+                "BranchCode": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/FileStorage/DeleteImageFileDetail": {
+      "delete": {
+        "tags": [
+          "FileStorage"
+        ],
+        "parameters": [
+          {
+            "name": "FileId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "TableCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/GST/GSTVerification": {
+      "get": {
+        "tags": [
+          "GST"
+        ],
+        "parameters": [
+          {
+            "name": "GSTIn",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Locations/countries": {
+      "get": {
+        "tags": [
+          "Locations"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Locations/states/{countryCode}": {
+      "get": {
+        "tags": [
+          "Locations"
+        ],
+        "parameters": [
+          {
+            "name": "countryCode",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/GetFloorMasterList": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/CreateFloorMasterDetail": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FloorMasterRequestModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FloorMasterRequestModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FloorMasterRequestModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/UpdateFloorMasterDetail": {
+      "put": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FloorMasterRequestModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FloorMasterRequestModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FloorMasterRequestModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/DeleteFloorMasterDetail": {
+      "delete": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "FloorId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "FloorCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/GetFinancialMasterList": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/SaveorUpdateFinancialMasterDetail": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FinancialMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FinancialMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FinancialMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/DeleteFinancialMasterDetail": {
+      "delete": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "FinId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/GetRoomTypeMasterList": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/CreateRoomTypeMasterDetail": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoomTypeMasterRequestModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoomTypeMasterRequestModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoomTypeMasterRequestModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/UpdateRoomTypeMasterDetail": {
+      "put": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoomTypeMasterRequestModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoomTypeMasterRequestModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoomTypeMasterRequestModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/DeleteRoomTypeMasterDetail": {
+      "delete": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "RoomId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "RoomCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/GetPlanMasterList": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/CreatePlanMasterDetail": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/UpdatePlanMasterDetail": {
+      "put": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/DeletePlanMasterDetail": {
+      "delete": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "PlanId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PlanCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/GetRoomDetailMasterList": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/CreateRoomDetailMasterDetail": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RoomDetailMasterRequestModel"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RoomDetailMasterRequestModel"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RoomDetailMasterRequestModel"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/UpdateRoomDetailMasterDetail": {
+      "put": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RoomDetailMasterRequestModel"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RoomDetailMasterRequestModel"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RoomDetailMasterRequestModel"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/DeleteRoomDetailMasterDetail": {
+      "delete": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "RoomDetailId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "RoomNo",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "RoomCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "FloorCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/GetPurposeMasterList": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/CreatePurposeMasterDetail": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PurposeMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PurposeMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PurposeMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/UpdatePurposeMasterDetail": {
+      "put": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PurposeMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PurposeMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PurposeMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/DeletePurposeMasterDetail": {
+      "delete": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "PurposeId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PurposeCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/GetPaymentMainMasterList": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/GetPaymentSubMasterList": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/SaveMainandSubPaymentMode": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentModeRequestModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentModeRequestModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentModeRequestModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/DeleteMainPaymentModeDetail": {
+      "delete": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "MainModeId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/DeleteSubPaymentModeDetail": {
+      "delete": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "SubModeId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/GetIdentityproofMasterList": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/CreateIdentityproofMasterDetail": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IdentityproofMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IdentityproofMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/IdentityproofMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/UpdateIdentityproofMasterDetail": {
+      "put": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IdentityproofMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IdentityproofMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/IdentityproofMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/DeleteIdentityproofMasterDetail": {
+      "delete": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "IdentityproofId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "IdentityproofCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/GetTaxMasterList": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/CreateTaxMasterDetail": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaxMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaxMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaxMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/UpdateTaxMasterDetail": {
+      "put": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaxMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaxMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaxMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/DeleteTaxMasterDetail": {
+      "delete": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "TaxId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "TaxCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/GetTaxDescriptionMasterList": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/CreateTaxDescriptionMasterDetail": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaxDescriptionMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaxDescriptionMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaxDescriptionMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/UpdateTaxDescriptionMasterDetail": {
+      "put": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaxDescriptionMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaxDescriptionMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaxDescriptionMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/DeleteTaxDescriptionMasterDetail": {
+      "delete": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "TaxDescriptionId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "TaxDescriptionCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/GetCompanyMasterList": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/CreateCompanyMasterDetail": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompanyMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompanyMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompanyMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/UpdateCompanyMasterDetail": {
+      "put": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompanyMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompanyMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompanyMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/DeleteCompanyMasterDetail": {
+      "delete": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "CompanyId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "CompanyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/GetCompanyTraiffMasterList": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/CreateCompanyTraiffMasterDetail": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CompanyTraiffRequestModel"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CompanyTraiffRequestModel"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CompanyTraiffRequestModel"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/UpdateCompanyTraiffMasterDetail": {
+      "put": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CompanyTraiffRequestModel"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CompanyTraiffRequestModel"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CompanyTraiffRequestModel"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/DeleteCompanyTraiffMasterDetail": {
+      "delete": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "CompanyTraiffId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "RoomCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "CompanyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/GetRevenueMasterList": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/CreateRevenueMasterDetail": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RevenueMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RevenueMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RevenueMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/UpdateRevenueMasterDetail": {
+      "put": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RevenueMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RevenueMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RevenueMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/DeleteRevenueMasterDetail": {
+      "delete": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "RevenueId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "RevenueCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/GetStewardMasterList": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/CreateStewardMasterDetail": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StewardMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StewardMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StewardMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/UpdateStewardMasterDetail": {
+      "put": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StewardMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StewardMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StewardMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/DeleteStewardMasterDetail": {
+      "delete": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "StewardId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "StewardCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/GetItemMasterList": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/CreateItemMasterDetail": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/UpdateItemMasterDetail": {
+      "put": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/DeleteItemMasterDetail": {
+      "delete": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "ItemId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "ItemCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/GetSegmentMasterList": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/CreateSegmentMasterDetail": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SegmentMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SegmentMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SegmentMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/UpdateSegmentMasterDetail": {
+      "put": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SegmentMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SegmentMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SegmentMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/DeleteSegmentMasterDetail": {
+      "delete": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "SegmentId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "SegmentCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/GetSubSegmentMasterList": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/CreateSubSegmentMasterDetail": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubSegmentMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubSegmentMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubSegmentMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/UpdateSubSegmentMasterDetail": {
+      "put": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubSegmentMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubSegmentMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubSegmentMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/DeleteSubSegmentMasterDetail": {
+      "delete": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "SubSegmentId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "SubSegmentCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/GetGuestMasterList": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/CreateGuestMasterDetail": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GuestMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GuestMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GuestMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/UpdateGuestMasterDetail": {
+      "put": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GuestMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GuestMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GuestMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/DeleteGuestMasterDetail": {
+      "delete": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "GuestId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "GuestCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/GetFormCMasterList": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/CreateFormCMasterDetail": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FormCRequestModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FormCRequestModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FormCRequestModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/UpdateFormCMasterDetail": {
+      "put": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FormCRequestModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FormCRequestModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FormCRequestModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/DeleteFormCMasterDetail": {
+      "delete": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "FormCId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "GuestCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/GetLedgerMasterList": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/CreateLedgerMasterDetail": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LedgerMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LedgerMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LedgerMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/UpdateLedgerMasterDetail": {
+      "put": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LedgerMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LedgerMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LedgerMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/DeleteLedgerMasterDetail": {
+      "delete": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "LedgerId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "LedgerCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/GetTaxRulesMasterList": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/CreateTaxRulesMasterDetail": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaxRulesMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaxRulesMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaxRulesMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/UpdateTaxRulesMasterDetail": {
+      "put": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaxRulesMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaxRulesMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaxRulesMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/DeleteTaxRulesMasterDetail": {
+      "delete": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "TaxRulesId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "TaxRulesCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/GetDriverMasterList": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/CreateDriverMasterDetail": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DriverMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DriverMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DriverMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/UpdateDriverMasterDetail": {
+      "put": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DriverMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DriverMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DriverMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/DeleteDriverMasterDetail": {
+      "delete": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "DriverId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "DriverCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/GetBookingSourceMasterList": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/CreateBookingSourceMasterDetail": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookingSourceMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookingSourceMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookingSourceMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/UpdateBookingSourceMasterDetail": {
+      "put": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookingSourceMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookingSourceMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookingSourceMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/DeleteBookingSourceMasterDetail": {
+      "delete": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "BookingSourceId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "BookingSourceCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/GetInstructionDepartmentMasterList": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/CreateInstructionDepartmentMasterDetail": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InstructionDepartmentMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InstructionDepartmentMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InstructionDepartmentMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/UpdateInstructionDepartmentMasterDetail": {
+      "put": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InstructionDepartmentMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InstructionDepartmentMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InstructionDepartmentMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/DeleteInstructionDepartmentMasterDetail": {
+      "delete": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "InstructionDepartmentId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "InstructionDepartmentCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/GetSalesExecutiveMasterList": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/CreateSalesExecutiveMasterDetail": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SalesExecutiveMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SalesExecutiveMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SalesExecutiveMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/UpdateSalesExecutiveMasterDetail": {
+      "put": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SalesExecutiveMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SalesExecutiveMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SalesExecutiveMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/DeleteSalesExecutiveMasterDetail": {
+      "delete": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "SalesExecutiveId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "SalesExecutiveCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/GetReservationPayModeMasterList": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/CreateReservationPayModeMasterDetail": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReservationPayModeMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReservationPayModeMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReservationPayModeMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/UpdateReservationPayModeMasterDetail": {
+      "put": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReservationPayModeMasterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReservationPayModeMasterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReservationPayModeMasterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/DeleteReservationPayModeMasterDetail": {
+      "delete": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "ReservationPayModeId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "ReservationPayModeCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/GetNextMasterCode": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "TableName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "CodeColumn",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefix",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ProductLicence/GetProductLicenceKey": {
+      "get": {
+        "tags": [
+          "ProductLicence"
+        ],
+        "parameters": [
+          {
+            "name": "branchcode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ProductLicence/SaveProductLicenceKey": {
+      "post": {
+        "tags": [
+          "ProductLicence"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InsertProductLicenceModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InsertProductLicenceModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InsertProductLicenceModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ProductLicence/decode": {
+      "post": {
+        "tags": [
+          "ProductLicence"
+        ],
+        "parameters": [
+          {
+            "name": "EncodedProductkey",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Reservation/GetChartAvailability": {
+      "get": {
+        "tags": [
+          "Reservation"
+        ],
+        "parameters": [
+          {
+            "name": "NoDays",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "checkInDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Reservation/GetRoomAvailability": {
+      "get": {
+        "tags": [
+          "Reservation"
+        ],
+        "parameters": [
+          {
+            "name": "noDays",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "checkInDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Reservation/GetTaxDetails": {
+      "get": {
+        "tags": [
+          "Reservation"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Reservation/GetTaxRulesDetails": {
+      "get": {
+        "tags": [
+          "Reservation"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Reservation/GetPlanDetails": {
+      "get": {
+        "tags": [
+          "Reservation"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Reservation/GetRoomTraiffDetails": {
+      "get": {
+        "tags": [
+          "Reservation"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Reservation/GetCompanyTraiffDetails": {
+      "get": {
+        "tags": [
+          "Reservation"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Reservation/GetCombinedReservationDetails": {
+      "get": {
+        "tags": [
+          "Reservation"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Reservation/CreateReservationDetail": {
+      "post": {
+        "tags": [
+          "Reservation"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReservationRequestModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReservationRequestModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReservationRequestModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Reservation/BookingCancellationDetail": {
+      "post": {
+        "tags": [
+          "Reservation"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookingCancellationModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookingCancellationModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookingCancellationModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Reservation/GetGuestSearchList": {
+      "get": {
+        "tags": [
+          "Reservation"
+        ],
+        "parameters": [
+          {
+            "name": "SearchingName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Reservation/GetReservationCompleteDetails": {
+      "get": {
+        "tags": [
+          "Reservation"
+        ],
+        "parameters": [
+          {
+            "name": "GuestCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ReservationNo",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/TaxCalculation/CalculateDynamicTaxes": {
+      "post": {
+        "tags": [
+          "TaxCalculation"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaxCalculationRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaxCalculationRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaxCalculationRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UserAccessMaster/GetBranchesByMasterUser": {
+      "get": {
+        "tags": [
+          "UserAccessMaster"
+        ],
+        "parameters": [
+          {
+            "name": "Username",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Password",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UserAccessMaster/BtnSubmitLogin": {
+      "post": {
+        "tags": [
+          "UserAccessMaster"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginBranchRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginBranchRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginBranchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UserAccessMaster/GetUserMasterList": {
+      "get": {
+        "tags": [
+          "UserAccessMaster"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UserAccessMaster/CreateUserMaster": {
+      "post": {
+        "tags": [
+          "UserAccessMaster"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserMaster"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserMaster"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserMaster"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UserAccessMaster/UpdateUserMaster": {
+      "put": {
+        "tags": [
+          "UserAccessMaster"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserMaster"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserMaster"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserMaster"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UserAccessMaster/DeleteUserMaster": {
+      "delete": {
+        "tags": [
+          "UserAccessMaster"
+        ],
+        "parameters": [
+          {
+            "name": "UserCode",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UserAccessMaster/ChangeUserPassword": {
+      "put": {
+        "tags": [
+          "UserAccessMaster"
+        ],
+        "parameters": [
+          {
+            "name": "UserCode",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "NewUserPassword",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UserAccessMaster/GetBranchesList": {
+      "get": {
+        "tags": [
+          "UserAccessMaster"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UserAccessMaster/GetPropertiesList": {
+      "get": {
+        "tags": [
+          "UserAccessMaster"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UserAccessMaster/GetRoleMasterList": {
+      "get": {
+        "tags": [
+          "UserAccessMaster"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UserAccessMaster/GetMainMenuList": {
+      "get": {
+        "tags": [
+          "UserAccessMaster"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UserAccessMaster/GetSubMenuList": {
+      "get": {
+        "tags": [
+          "UserAccessMaster"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UserAccessMaster/SaveMenuWithSubMenu": {
+      "post": {
+        "tags": [
+          "UserAccessMaster"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MenuWithSubMenuModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MenuWithSubMenuModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MenuWithSubMenuModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UserAccessMaster/DeleteMainMenuDetail": {
+      "delete": {
+        "tags": [
+          "UserAccessMaster"
+        ],
+        "parameters": [
+          {
+            "name": "MainMenuId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UserAccessMaster/DeleteSubMenuDetail": {
+      "delete": {
+        "tags": [
+          "UserAccessMaster"
+        ],
+        "parameters": [
+          {
+            "name": "SubMenuId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UserAccessMaster/GetUserPermissionAccessList": {
+      "get": {
+        "tags": [
+          "UserAccessMaster"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "UserCode",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "RoleId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UserAccessMaster/InsertUserPermissionAccessMaster": {
+      "post": {
+        "tags": [
+          "UserAccessMaster"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UserPermissionAccessMaster"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UserPermissionAccessMaster"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UserPermissionAccessMaster"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UserAccessMaster/GetAccessRightsList": {
+      "get": {
+        "tags": [
+          "UserAccessMaster"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UserAccessMaster/GetOperationRightsList": {
+      "get": {
+        "tags": [
+          "UserAccessMaster"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UserAccessMaster/SaveAccessOROperationRights": {
+      "post": {
+        "tags": [
+          "UserAccessMaster"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RightsMasterRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RightsMasterRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RightsMasterRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UserAccessMaster/DeleteAccessRightsDetail": {
+      "delete": {
+        "tags": [
+          "UserAccessMaster"
+        ],
+        "parameters": [
+          {
+            "name": "AccessRightId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UserAccessMaster/DeleteOperationRightsDetail": {
+      "delete": {
+        "tags": [
+          "UserAccessMaster"
+        ],
+        "parameters": [
+          {
+            "name": "OperationRightId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UserAccessMaster/GetUserAccessRightsList": {
+      "get": {
+        "tags": [
+          "UserAccessMaster"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "UserCode",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "RoleId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UserAccessMaster/InsertUserAccessRightsMaster": {
+      "post": {
+        "tags": [
+          "UserAccessMaster"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UserAccessRightsMaster"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UserAccessRightsMaster"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UserAccessRightsMaster"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UserAccessMaster/GetUserOperationRightsList": {
+      "get": {
+        "tags": [
+          "UserAccessMaster"
+        ],
+        "parameters": [
+          {
+            "name": "PropertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "UserCode",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "RoleId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UserAccessMaster/InsertUserOperationRightsMaster": {
+      "post": {
+        "tags": [
+          "UserAccessMaster"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UserOperationRightsMaster"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UserOperationRightsMaster"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UserOperationRightsMaster"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/WeatherForecast": {
+      "get": {
+        "tags": [
+          "WeatherForecast"
+        ],
+        "operationId": "GetWeatherForecast",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ActiveCheckInDto": {
+        "type": "object",
+        "properties": {
+          "checkInNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "roomNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "arrivalDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "departureDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ActiveCheckInDtoIReadOnlyListApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ActiveCheckInDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ArrivalDetail": {
+        "type": "object",
+        "properties": {
+          "arrivalCity": {
+            "type": "string",
+            "nullable": true
+          },
+          "arrivalCountry": {
+            "type": "string",
+            "nullable": true
+          },
+          "arrivalDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "hotelArrivalDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "hotelArrivalTime": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "noofStay": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "visitPurpose": {
+            "type": "string",
+            "nullable": true
+          },
+          "departureDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "BookingCancellationModel": {
+        "type": "object",
+        "properties": {
+          "moduleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "moduleName": {
+            "type": "string",
+            "nullable": true
+          },
+          "moduleCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "cancelDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "cancelTime": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "cancelRemarks": {
+            "type": "string",
+            "nullable": true
+          },
+          "mainModeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mainModeType": {
+            "type": "string",
+            "nullable": true
+          },
+          "subModeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "subModeType": {
+            "type": "string",
+            "nullable": true
+          },
+          "referenceNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "holderName": {
+            "type": "string",
+            "nullable": true
+          },
+          "bankName": {
+            "type": "string",
+            "nullable": true
+          },
+          "transactionDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "netAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "amountPaid": {
+            "type": "number",
+            "format": "double"
+          },
+          "refundPercentage": {
+            "type": "number",
+            "format": "double"
+          },
+          "refundAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "userCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BookingDetailModel": {
+        "type": "object",
+        "properties": {
+          "reservationSlaveId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "forEverId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "reservationSlaveCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "roomCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "roomType": {
+            "type": "string",
+            "nullable": true
+          },
+          "noofRoom": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "noofAdult": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "noofChild": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "planCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "allocated": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "taxCalculationDetails": {
+            "$ref": "#/components/schemas/TaxBreakdownResponseDto"
+          },
+          "foodRate": {
+            "type": "number",
+            "format": "double"
+          },
+          "traiff": {
+            "type": "number",
+            "format": "double"
+          },
+          "discountType": {
+            "type": "string",
+            "nullable": true
+          },
+          "netpayable": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "BookingSourceMasterModel": {
+        "type": "object",
+        "properties": {
+          "bookingSourceId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bookingSourceCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "bookingSourceName": {
+            "type": "string",
+            "nullable": true
+          },
+          "isBookingSourceActive": {
+            "type": "boolean"
+          },
+          "userCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CardDetails": {
+        "type": "object",
+        "properties": {
+          "cardHolderName": {
+            "type": "string",
+            "nullable": true
+          },
+          "cardNumber": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CheckInBookingDetailModel": {
+        "type": "object",
+        "properties": {
+          "checkInSlaveId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "forEverId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "roomNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "roomCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "roomType": {
+            "type": "string",
+            "nullable": true
+          },
+          "noofRoom": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "noofAdult": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "noofChild": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "planCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "traiff": {
+            "type": "number",
+            "format": "double"
+          },
+          "foodRate": {
+            "type": "number",
+            "format": "double"
+          },
+          "netpayable": {
+            "type": "number",
+            "format": "double"
+          },
+          "discountType": {
+            "type": "string",
+            "nullable": true
+          },
+          "allocated": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "taxCalculationDetails": {
+            "$ref": "#/components/schemas/TaxBreakdownResponseDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CheckInGuestDetailModel": {
+        "type": "object",
+        "properties": {
+          "guestId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "guestCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestTitle": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestName": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyName": {
+            "type": "string",
+            "nullable": true
+          },
+          "gstNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestGender": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestDOB": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "guestDOA": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "guestAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestCity": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestState": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestNation": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestPinCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestMobileNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "identityproofCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "identityproofName": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestVehicleType": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestVehicleNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "reference": {
+            "type": "string",
+            "nullable": true
+          },
+          "referenceMobileNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "referenceEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "segmentName": {
+            "type": "string",
+            "nullable": true
+          },
+          "subSegmentName": {
+            "type": "string",
+            "nullable": true
+          },
+          "salesExecutiveName": {
+            "type": "string",
+            "nullable": true
+          },
+          "bookingSourceName": {
+            "type": "string",
+            "nullable": true
+          },
+          "purposeName": {
+            "type": "string",
+            "nullable": true
+          },
+          "conventionFees": {
+            "type": "string",
+            "nullable": true
+          },
+          "isPrimaryGuest": {
+            "type": "boolean"
+          },
+          "bookingId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CheckInRequestModel": {
+        "type": "object",
+        "properties": {
+          "roomNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "checkInDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "checkOutDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "noofDays": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "checkInTime": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "checkOutTime": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "checkInId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "checkInNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "pmscms": {
+            "type": "string",
+            "nullable": true
+          },
+          "reference": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestDetails": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CheckInGuestDetailModel"
+            },
+            "nullable": true
+          },
+          "driverDetails": {
+            "$ref": "#/components/schemas/DriverMasterModel"
+          },
+          "formCDetails": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FormCRequestModel"
+            },
+            "nullable": true
+          },
+          "paymentDetail": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PaymentDetailModel"
+            },
+            "nullable": true
+          },
+          "checkInType": {
+            "type": "string",
+            "nullable": true
+          },
+          "reservationNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "grcNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "groupCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "discountType": {
+            "type": "string",
+            "nullable": true
+          },
+          "discountValue": {
+            "type": "number",
+            "format": "double"
+          },
+          "gracePeriod": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bookingDetail": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CheckInBookingDetailModel"
+            },
+            "nullable": true
+          },
+          "checkInChargeDetail": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReservationChargeModel"
+            },
+            "nullable": true
+          },
+          "instructionDetail": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpecialInstructionModel"
+            },
+            "nullable": true
+          },
+          "isExistingCheckIn": {
+            "type": "boolean"
+          },
+          "isAmend": {
+            "type": "boolean"
+          },
+          "isCheckInExtraCharged": {
+            "type": "boolean"
+          },
+          "isSpecialInstruction": {
+            "type": "boolean"
+          },
+          "userCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ChequeDetails": {
+        "type": "object",
+        "properties": {
+          "chequeNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "bankName": {
+            "type": "string",
+            "nullable": true
+          },
+          "chequeDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CompanyMasterModel": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "companyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyName": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyType": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyContactPerson": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyMobileNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyCity": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyState": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyNation": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyPincode": {
+            "type": "string",
+            "nullable": true
+          },
+          "isCompanyActive": {
+            "type": "boolean"
+          },
+          "companyGSTNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyGSTType": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyGSTStateCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyOpeningBalance": {
+            "type": "number",
+            "format": "double"
+          },
+          "userCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CompanyTraiffRequestModel": {
+        "type": "object",
+        "properties": {
+          "companyTraiffId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "companyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "roomCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "traiffCategory": {
+            "type": "string",
+            "nullable": true
+          },
+          "roomPlanType": {
+            "type": "string",
+            "nullable": true
+          },
+          "planId": {
+            "type": "string",
+            "nullable": true
+          },
+          "planName": {
+            "type": "string",
+            "nullable": true
+          },
+          "defaultTraiff": {
+            "type": "number",
+            "format": "double"
+          },
+          "pax": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paxRates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlanRateDto"
+            },
+            "nullable": true
+          },
+          "extraAdult": {
+            "type": "number",
+            "format": "double"
+          },
+          "extraChild": {
+            "type": "number",
+            "format": "double"
+          },
+          "taxInclude": {
+            "type": "boolean"
+          },
+          "serviceTax": {
+            "type": "boolean"
+          },
+          "package": {
+            "type": "boolean"
+          },
+          "userCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContactDetail": {
+        "type": "object",
+        "properties": {
+          "mobileNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DriverMasterModel": {
+        "type": "object",
+        "properties": {
+          "driverId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "driverCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "driverName": {
+            "type": "string",
+            "nullable": true
+          },
+          "driverMobileNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "driverVechileNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "isDriverActive": {
+            "type": "boolean"
+          },
+          "userCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FinancialMasterModel": {
+        "type": "object",
+        "properties": {
+          "finId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "finFromDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "finToDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "finCurrentYear": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "finNewYear": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "currentStatus": {
+            "type": "boolean"
+          },
+          "backUpTook": {
+            "type": "string",
+            "nullable": true
+          },
+          "finalClose": {
+            "type": "string",
+            "nullable": true
+          },
+          "finCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FloorMasterRequestModel": {
+        "type": "object",
+        "properties": {
+          "floorCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "floorName": {
+            "type": "string",
+            "nullable": true
+          },
+          "floorDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "floorStatus": {
+            "type": "boolean"
+          },
+          "maxRoom": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FormCRequestModel": {
+        "type": "object",
+        "properties": {
+          "formCId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "formCCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "checkinNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "indiaDetails": {
+            "$ref": "#/components/schemas/IndianAddressDetail"
+          },
+          "permanentDetails": {
+            "$ref": "#/components/schemas/PermanentAddressDetail"
+          },
+          "passportDetails": {
+            "$ref": "#/components/schemas/PassportDetail"
+          },
+          "visaDetails": {
+            "$ref": "#/components/schemas/VisaDetail"
+          },
+          "arrivalDetails": {
+            "$ref": "#/components/schemas/ArrivalDetail"
+          },
+          "nextDestinationDetails": {
+            "$ref": "#/components/schemas/NextDestinationDetail"
+          },
+          "contactDetails": {
+            "$ref": "#/components/schemas/ContactDetail"
+          },
+          "userCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GuestMasterModel": {
+        "type": "object",
+        "properties": {
+          "guestId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "guestCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestTitle": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestName": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestGender": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestDOB": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "guestDOA": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "guestAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestCity": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestState": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestNation": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestPinCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestMobileNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "identityproofCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "identityproofName": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestVehicleType": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestVehicleNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "isGuestActive": {
+            "type": "boolean"
+          },
+          "userCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "IdentityproofMasterModel": {
+        "type": "object",
+        "properties": {
+          "identityproofId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "identityproofCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "identityproofName": {
+            "type": "string",
+            "nullable": true
+          },
+          "isIdentityproofActive": {
+            "type": "boolean"
+          },
+          "userCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "IndianAddressDetail": {
+        "type": "object",
+        "properties": {
+          "indiaAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "indiaCity": {
+            "type": "string",
+            "nullable": true
+          },
+          "indiaState": {
+            "type": "string",
+            "nullable": true
+          },
+          "indiaPinCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "indiaCountry": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "InsertProductLicenceModel": {
+        "type": "object",
+        "properties": {
+          "serialKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "productKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "trDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "clientName": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "InstructionDepartmentMasterModel": {
+        "type": "object",
+        "properties": {
+          "instructionDepartmentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "instructionDepartmentCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "instructionDepartmentName": {
+            "type": "string",
+            "nullable": true
+          },
+          "isInstructionDepartmentActive": {
+            "type": "boolean"
+          },
+          "userCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ItemMasterModel": {
+        "type": "object",
+        "properties": {
+          "itemId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "itemCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemName": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemRate": {
+            "type": "number",
+            "format": "double"
+          },
+          "revenueCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "revenueName": {
+            "type": "string",
+            "nullable": true
+          },
+          "isItemActive": {
+            "type": "boolean"
+          },
+          "userCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LedgerMasterModel": {
+        "type": "object",
+        "properties": {
+          "ledgerId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ledgerCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "ledgerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "ledgerOpeningBalance": {
+            "type": "number",
+            "format": "double"
+          },
+          "isLedgerActive": {
+            "type": "boolean"
+          },
+          "userCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LoginBranchRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "roleId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MenuWithSubMenuModel": {
+        "type": "object",
+        "properties": {
+          "mainMenuId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mainMenuName": {
+            "type": "string",
+            "nullable": true
+          },
+          "mainMenuRequired": {
+            "type": "boolean"
+          },
+          "subMenuId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "subMenuName": {
+            "type": "string",
+            "nullable": true
+          },
+          "subMenuRequired": {
+            "type": "boolean"
+          },
+          "parentSubMenuId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isExistingMainMenu": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "NextDestinationDetail": {
+        "type": "object",
+        "properties": {
+          "nextDestinationPlace": {
+            "type": "string",
+            "nullable": true
+          },
+          "nextDestinationCity": {
+            "type": "string",
+            "nullable": true
+          },
+          "nextDestinationState": {
+            "type": "string",
+            "nullable": true
+          },
+          "nextDestinationCountry": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OnlineDetails": {
+        "type": "object",
+        "properties": {
+          "accountNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "accountHolderName": {
+            "type": "string",
+            "nullable": true
+          },
+          "bankName": {
+            "type": "string",
+            "nullable": true
+          },
+          "onlineDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PassportDetail": {
+        "type": "object",
+        "properties": {
+          "passportNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "passportIssueCity": {
+            "type": "string",
+            "nullable": true
+          },
+          "passportIssueCountry": {
+            "type": "string",
+            "nullable": true
+          },
+          "passportIssueDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "passportExpiryDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PaxRateDto": {
+        "type": "object",
+        "properties": {
+          "paxNo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rate": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PaymentDetailModel": {
+        "type": "object",
+        "properties": {
+          "advanceReceiptId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mainModeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mainModeType": {
+            "type": "string",
+            "nullable": true
+          },
+          "subModeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "subModeType": {
+            "type": "string",
+            "nullable": true
+          },
+          "chequeDetail": {
+            "$ref": "#/components/schemas/ChequeDetails"
+          },
+          "cardDetail": {
+            "$ref": "#/components/schemas/CardDetails"
+          },
+          "onlineDetail": {
+            "$ref": "#/components/schemas/OnlineDetails"
+          },
+          "amountPaid": {
+            "type": "number",
+            "format": "double"
+          },
+          "amountBalance": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PaymentModeRequestModel": {
+        "type": "object",
+        "properties": {
+          "mainModeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mainModeType": {
+            "type": "string",
+            "nullable": true
+          },
+          "isMainModeActive": {
+            "type": "boolean"
+          },
+          "subModeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "subModeType": {
+            "type": "string",
+            "nullable": true
+          },
+          "isSubModeActive": {
+            "type": "boolean"
+          },
+          "userCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "isExistingMainMode": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PermanentAddressDetail": {
+        "type": "object",
+        "properties": {
+          "permanentAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "permanentCity": {
+            "type": "string",
+            "nullable": true
+          },
+          "permanentState": {
+            "type": "string",
+            "nullable": true
+          },
+          "permanentPinCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "permanentCountry": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PlanMasterModel": {
+        "type": "object",
+        "properties": {
+          "planId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "planCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "planName": {
+            "type": "string",
+            "nullable": true
+          },
+          "planDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "isPlanActive": {
+            "type": "boolean"
+          },
+          "isDefaultPlan": {
+            "type": "boolean"
+          },
+          "foodRate": {
+            "type": "number",
+            "format": "double"
+          },
+          "taxCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "userCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PlanRateDto": {
+        "type": "object",
+        "properties": {
+          "planId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "planName": {
+            "type": "string",
+            "nullable": true
+          },
+          "paxRates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PaxRateDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
+      },
+      "PurposeMasterModel": {
+        "type": "object",
+        "properties": {
+          "purposeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "purposeCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "purposeName": {
+            "type": "string",
+            "nullable": true
+          },
+          "isPurposeActive": {
+            "type": "boolean"
+          },
+          "userCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReservationChargeModel": {
+        "type": "object",
+        "properties": {
+          "reservationChargeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bookingNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "checkInNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "reservationNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "category": {
+            "type": "string",
+            "nullable": true
+          },
+          "chargesDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rate": {
+            "type": "number",
+            "format": "double"
+          },
+          "taxAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "totalAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "netAmount": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReservationGuestDetailModel": {
+        "type": "object",
+        "properties": {
+          "guestId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "guestCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestTitle": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestName": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyName": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestGender": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestCity": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestState": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestNation": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestPinCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestMobileNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "reference": {
+            "type": "string",
+            "nullable": true
+          },
+          "referenceMobileNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "referenceEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "segmentName": {
+            "type": "string",
+            "nullable": true
+          },
+          "subSegmentName": {
+            "type": "string",
+            "nullable": true
+          },
+          "salesExecutiveName": {
+            "type": "string",
+            "nullable": true
+          },
+          "bookingSourceName": {
+            "type": "string",
+            "nullable": true
+          },
+          "purposeName": {
+            "type": "string",
+            "nullable": true
+          },
+          "reservationPayModeName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReservationPayModeMasterModel": {
+        "type": "object",
+        "properties": {
+          "reservationPayModeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "reservationPayModeCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "reservationPayModeName": {
+            "type": "string",
+            "nullable": true
+          },
+          "isReservationPayModeActive": {
+            "type": "boolean"
+          },
+          "userCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReservationRequestModel": {
+        "type": "object",
+        "properties": {
+          "checkInDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "checkOutDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "noofDays": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "checkInTime": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "checkOutTime": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "reservationId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "reservationNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "pmscms": {
+            "type": "string",
+            "nullable": true
+          },
+          "guestDetail": {
+            "$ref": "#/components/schemas/ReservationGuestDetailModel"
+          },
+          "bookingDetail": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BookingDetailModel"
+            },
+            "nullable": true
+          },
+          "paymentDetail": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PaymentDetailModel"
+            },
+            "nullable": true
+          },
+          "instructionDetail": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpecialInstructionModel"
+            },
+            "nullable": true
+          },
+          "reservationChargeDetail": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReservationChargeModel"
+            },
+            "nullable": true
+          },
+          "isExistingReservation": {
+            "type": "boolean"
+          },
+          "isAmend": {
+            "type": "boolean"
+          },
+          "isReservationExtraCharged": {
+            "type": "boolean"
+          },
+          "isSpecialInstruction": {
+            "type": "boolean"
+          },
+          "userCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RevenueMasterModel": {
+        "type": "object",
+        "properties": {
+          "revenueId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "revenueCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "revenueName": {
+            "type": "string",
+            "nullable": true
+          },
+          "isRevenueActive": {
+            "type": "boolean"
+          },
+          "taxCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "sacCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "isHouseKeeping": {
+            "type": "boolean"
+          },
+          "userCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RightsMasterRequest": {
+        "type": "object",
+        "properties": {
+          "rightsCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "rightsName": {
+            "type": "string",
+            "nullable": true
+          },
+          "isPermission": {
+            "type": "boolean"
+          },
+          "accessType": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RoomDetailMasterRequestModel": {
+        "type": "object",
+        "properties": {
+          "roomDetailId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "roomNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "roomCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "roomDetailDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "isRoomDetailActive": {
+            "type": "boolean"
+          },
+          "defaultPax": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "priority": {
+            "type": "string"
+          },
+          "floorCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "roomStatus": {
+            "type": "string"
+          },
+          "currentCheckIn": {
+            "type": "string",
+            "nullable": true
+          },
+          "groupCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "checkInBillNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "userCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "oldRoomNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "oldRoomCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "oldFloorCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RoomTypeMasterRequestModel": {
+        "type": "object",
+        "properties": {
+          "roomCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "roomName": {
+            "type": "string",
+            "nullable": true
+          },
+          "roomDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "roomMode": {
+            "type": "string",
+            "nullable": true
+          },
+          "isRoomActive": {
+            "type": "boolean"
+          },
+          "totalRooms": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "roomPlanType": {
+            "type": "string",
+            "nullable": true
+          },
+          "planId": {
+            "type": "string",
+            "nullable": true
+          },
+          "planName": {
+            "type": "string",
+            "nullable": true
+          },
+          "channelManagerCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "userCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "defaultTraiff": {
+            "type": "number",
+            "format": "double"
+          },
+          "pax": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paxRates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlanRateDto"
+            },
+            "nullable": true
+          },
+          "extraAdult": {
+            "type": "number",
+            "format": "double"
+          },
+          "extraChild": {
+            "type": "number",
+            "format": "double"
+          },
+          "taxinclude": {
+            "type": "boolean"
+          },
+          "package": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SalesExecutiveMasterModel": {
+        "type": "object",
+        "properties": {
+          "salesExecutiveId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "salesExecutiveCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "salesExecutiveName": {
+            "type": "string",
+            "nullable": true
+          },
+          "isSalesExecutiveActive": {
+            "type": "boolean"
+          },
+          "userCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SegmentMasterModel": {
+        "type": "object",
+        "properties": {
+          "segmentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "segmentCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "segmentName": {
+            "type": "string",
+            "nullable": true
+          },
+          "segmentDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "isSegmentActive": {
+            "type": "boolean"
+          },
+          "userCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecialInstructionModel": {
+        "type": "object",
+        "properties": {
+          "specialInstructionId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "instructionDepartmentCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "instructionDescriptionName": {
+            "type": "string",
+            "nullable": true
+          },
+          "specialInstructionDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "specialInstructionRemark": {
+            "type": "string",
+            "nullable": true
+          },
+          "bookingNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "checkInNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "reservationNo": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StewardMasterModel": {
+        "type": "object",
+        "properties": {
+          "stewardId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "stewardCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "stewardName": {
+            "type": "string",
+            "nullable": true
+          },
+          "stewardDOB": {
+            "type": "string",
+            "nullable": true
+          },
+          "stewardAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "stewardMobileNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "stewardEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "stewardCity": {
+            "type": "string",
+            "nullable": true
+          },
+          "stewardState": {
+            "type": "string",
+            "nullable": true
+          },
+          "stewardNation": {
+            "type": "string",
+            "nullable": true
+          },
+          "stewardPincode": {
+            "type": "string",
+            "nullable": true
+          },
+          "isStewardActive": {
+            "type": "boolean"
+          },
+          "userCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StringApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SubSegmentMasterModel": {
+        "type": "object",
+        "properties": {
+          "subSegmentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "subSegmentCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "subSegmentName": {
+            "type": "string",
+            "nullable": true
+          },
+          "segmentCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "isSubSegmentActive": {
+            "type": "boolean"
+          },
+          "userCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TaxBreakdownResponseDto": {
+        "type": "object",
+        "properties": {
+          "taxDetailsId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tariffAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "categorizedTaxes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/TaxItemDto"
+              }
+            },
+            "nullable": true
+          },
+          "discountAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "totalTaxAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "grandTotal": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TaxCalculationRequestDto": {
+        "type": "object",
+        "properties": {
+          "tariffAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "calculationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isForeignOrInterstateClient": {
+            "type": "boolean"
+          },
+          "extraAdult": {
+            "type": "number",
+            "format": "double"
+          },
+          "extraChild": {
+            "type": "number",
+            "format": "double"
+          },
+          "discountValue": {
+            "type": "number",
+            "format": "double"
+          },
+          "isDiscountPercentage": {
+            "type": "boolean"
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TaxDescriptionMasterModel": {
+        "type": "object",
+        "properties": {
+          "taxDescriptionId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "taxDescriptionCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "taxDescriptionName": {
+            "type": "string",
+            "nullable": true
+          },
+          "taxPercentage": {
+            "type": "number",
+            "format": "double"
+          },
+          "isTaxDescriptionActive": {
+            "type": "boolean"
+          },
+          "taxCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "fromAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "toAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "fromDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "toDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "userCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TaxItemDto": {
+        "type": "object",
+        "properties": {
+          "taxCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "taxName": {
+            "type": "string",
+            "nullable": true
+          },
+          "taxDescriptionCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "taxDescriptionName": {
+            "type": "string",
+            "nullable": true
+          },
+          "taxPercentage": {
+            "type": "number",
+            "format": "double"
+          },
+          "calculatedTaxAmount": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TaxMasterModel": {
+        "type": "object",
+        "properties": {
+          "taxId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "taxCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "taxName": {
+            "type": "string",
+            "nullable": true
+          },
+          "isTaxActive": {
+            "type": "boolean"
+          },
+          "userCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TaxRulesMasterModel": {
+        "type": "object",
+        "properties": {
+          "taxRuleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "taxRuleCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "traiff": {
+            "type": "string",
+            "nullable": true
+          },
+          "traiffOperation": {
+            "type": "string",
+            "nullable": true
+          },
+          "type1": {
+            "type": "string",
+            "nullable": true
+          },
+          "operation1": {
+            "type": "string",
+            "nullable": true
+          },
+          "type2": {
+            "type": "string",
+            "nullable": true
+          },
+          "isTaxRuleActive": {
+            "type": "boolean"
+          },
+          "isSeprateExtraBedTax": {
+            "type": "boolean"
+          },
+          "userCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserAccessRightsMaster": {
+        "type": "object",
+        "properties": {
+          "userCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          },
+          "roleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "roleName": {
+            "type": "string",
+            "nullable": true
+          },
+          "accessRightId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "accessRightName": {
+            "type": "string",
+            "nullable": true
+          },
+          "isPermission": {
+            "type": "boolean"
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserMaster": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          },
+          "userPassword": {
+            "type": "string",
+            "nullable": true
+          },
+          "userDOB": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "userAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "userMobile": {
+            "type": "string",
+            "nullable": true
+          },
+          "userMail": {
+            "type": "string",
+            "nullable": true
+          },
+          "userStatus": {
+            "type": "boolean"
+          },
+          "discountPer": {
+            "type": "string",
+            "nullable": true
+          },
+          "discountValue": {
+            "type": "number",
+            "format": "double"
+          },
+          "gracePeriod": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "propertyName": {
+            "type": "string",
+            "nullable": true
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchName": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "roleId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserOperationRightsMaster": {
+        "type": "object",
+        "properties": {
+          "userCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          },
+          "roleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "roleName": {
+            "type": "string",
+            "nullable": true
+          },
+          "operationRightId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "operationName": {
+            "type": "string",
+            "nullable": true
+          },
+          "isPermission": {
+            "type": "boolean"
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserPermissionAccessMaster": {
+        "type": "object",
+        "properties": {
+          "userCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          },
+          "roleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "roleName": {
+            "type": "string",
+            "nullable": true
+          },
+          "mainMenuId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mainMenuName": {
+            "type": "string",
+            "nullable": true
+          },
+          "mainMenuRequired": {
+            "type": "boolean"
+          },
+          "subMenuId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "subMenuName": {
+            "type": "string",
+            "nullable": true
+          },
+          "subMenuRequired": {
+            "type": "boolean"
+          },
+          "isPermission": {
+            "type": "boolean"
+          },
+          "canView": {
+            "type": "boolean"
+          },
+          "canAdd": {
+            "type": "boolean"
+          },
+          "canEdit": {
+            "type": "boolean"
+          },
+          "canDelete": {
+            "type": "boolean"
+          },
+          "canPrint": {
+            "type": "boolean"
+          },
+          "propertyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branchCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VisaDetail": {
+        "type": "object",
+        "properties": {
+          "visaNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "visaIssueCity": {
+            "type": "string",
+            "nullable": true
+          },
+          "visaIssueCountry": {
+            "type": "string",
+            "nullable": true
+          },
+          "visaIssueDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "visaExpiryDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "visaType": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "WeatherForecast": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "temperatureC": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "temperatureF": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "summary": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "Enter: Bearer {your JWT token}",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}
