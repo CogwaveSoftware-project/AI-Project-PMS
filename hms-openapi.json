@@ -63,6 +63,75 @@
         }
       }
     },
+    "/api/CheckIn/GetCheckInDetails": {
+      "get": {
+        "tags": [
+          "CheckIn"
+        ],
+        "parameters": [
+          {
+            "name": "propertyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "checkInNo",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActiveCheckInDtoIReadOnlyListApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActiveCheckInDtoIReadOnlyListApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActiveCheckInDtoIReadOnlyListApiResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/api/CheckIn/CreateCheckInDetail": {
       "post": {
         "tags": [
@@ -6456,7 +6525,7 @@
             "nullable": true
           }
         },
-        "additionalProperties": { }
+        "additionalProperties": {}
       },
       "PurposeMasterModel": {
         "type": "object",
@@ -7812,7 +7881,7 @@
   },
   "security": [
     {
-      "Bearer": [ ]
+      "Bearer": []
     }
   ]
 }

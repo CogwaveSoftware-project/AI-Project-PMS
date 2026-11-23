@@ -19,6 +19,8 @@ Many controller actions return a JSON envelope shaped like `{"success":true,"mes
 - Create a reservation with `CreateReservationDetail`. Retrieve its details with `GetReservationCompleteDetails`. Cancel using `BookingCancellationDetail`.
 - Submit check-in with `CreateCheckInDetail`. Include a named guest, valid stay dates, and a distinct room number for each booking room. Send dates as ISO date/time values and time-of-day fields as .NET time strings such as `14:00:00`. For a reservation conversion, include the reservation number. Success returns HTTP 201 with a string in `data`. HTTP 400 can contain a plain error string. A branch code that differs from the authenticated branch returns HTTP 403.
 - Fetch occupied rooms with `GetActiveCheckInList?propertyCode=...`. The branch comes from the JWT. HTTP 200 returns an envelope with one row per occupied room in `data`, including `checkInNo`, `roomNo`, `guestCode`, `arrivalDate`, and `departureDate`. An empty result returns `data: []`.
+- Fetch a single active stay with `GetCheckInDetails?propertyCode=...&checkInNo=...`. It returns the same room-row format for that check-in, including multiple rows for a group stay. HTTP 404 indicates there are no active rooms for that check-in in the requested property and authenticated branch.
+- For a reservation conversion, send one booking row per selected room. For each room type selected, the room count must match its unconverted reservation inventory.
 - The check-in endpoints require the tenant schema from [001-HMS-CheckIn.sql](../DataBase/001-HMS-CheckIn.sql), applied after the HMS baseline.
 
 ## Route catalog
@@ -191,12 +193,13 @@ Guest search, availability, booking details, pricing lookups, reservation creati
 
 ### CheckIn
 
-Front-desk check-in entry point.
+Front-desk check-in and active-stay queries.
 
 | Method | Route | Request model or parameters |
 | --- | --- | --- |
 | `POST` | `/api/CheckIn/CreateCheckInDetail` | CheckInRequestModel |
 | `GET` | `/api/CheckIn/GetActiveCheckInList` | propertyCode (query) |
+| `GET` | `/api/CheckIn/GetCheckInDetails` | propertyCode (query), checkInNo (query) |
 
 ### TaxCalculation
 
