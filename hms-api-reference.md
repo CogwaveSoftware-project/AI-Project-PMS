@@ -247,6 +247,16 @@ Existing licensing endpoints.
 | `POST` | `/api/ProductLicence/SaveProductLicenceKey` | InsertProductLicenceModel |
 | `POST` | `/api/ProductLicence/decode` | EncodedProductkey (query) |
 
+### Billing
+
+| Method | Route | Request model or parameters |
+| --- | --- | --- |
+| `POST` | `/api/Billing/GetRoomChargeEstimate` | RoomChargeEstimateRequest |
+
+Send `propertyCode`, `checkInNo`, and `isForeignOrInterstateClient` in the JSON body. The JWT supplies the branch. HTTP 200 returns room-by-date lines and tariff, tax, and estimated totals in `data`. HTTP 404 indicates that the stay has no active rooms in the requested property and branch.
+
+Use this endpoint for an indicative room tariff and tax display. It uses the recorded tariff and scheduled stay dates, charging arrival through the night before departure, with one charge for a same-day stay. The estimate excludes discounts, extras, posted charges, advances, package and room-move adjustments, and legacy checkout-time rules. The frontend should keep settlement and final bill preview pending.
+
 ## HMS workflows pending APIs
 
 Checkout, bill preview and history, split bills, standalone settlement and advance operations, night audit, financial-year rollover, housekeeping, dashboards, report export, and backup administration have no dedicated routes in this snapshot. Keep these frontend integrations pending until their contracts are published.
