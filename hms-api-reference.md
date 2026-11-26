@@ -31,6 +31,12 @@ The tables list the existing controller actions by module. For each named reques
 
 Login, property and branch selection, user administration, menus, and permissions.
 
+`BtnSubmitLogin` takes a JSON object with `username`, `password`, `branchCode`, and a numeric `roleId`. Include `propertyCode` when the user has selected a property. When supplied, it must match the user's property. An invalid credential or property combination returns HTTP 401.
+
+The three bulk permission and rights operations take a top-level JSON array of the specified model. `ChangeUserPassword` currently takes its three inputs in the query string. Use HTTPS and keep credential-bearing URLs out of logs.
+
+User creation returns HTTP 201. User updates, deletion, and password changes return HTTP 200 on success. Permission and rights saves return HTTP 201 for both inserts and updates. Read back submenu permissions through `data.menus[].subMenus`, access rights through `data.accessRights`, and operation rights through `data.operationRights`. The general submenu list groups `subMenus` by `mainMenuId`.
+
 | Method | Route | Request model or parameters |
 | --- | --- | --- |
 | `GET` | `/api/UserAccessMaster/GetBranchesByMasterUser` | Username (query), Password (query) |
@@ -49,20 +55,24 @@ Login, property and branch selection, user administration, menus, and permission
 | `DELETE` | `/api/UserAccessMaster/DeleteMainMenuDetail` | MainMenuId (query) |
 | `DELETE` | `/api/UserAccessMaster/DeleteSubMenuDetail` | SubMenuId (query) |
 | `GET` | `/api/UserAccessMaster/GetUserPermissionAccessList` | PropertyCode (query), UserCode (query), RoleId (query) |
-| `POST` | `/api/UserAccessMaster/InsertUserPermissionAccessMaster` | array |
+| `POST` | `/api/UserAccessMaster/InsertUserPermissionAccessMaster` | UserPermissionAccessMaster[] |
 | `GET` | `/api/UserAccessMaster/GetAccessRightsList` | None |
 | `GET` | `/api/UserAccessMaster/GetOperationRightsList` | None |
 | `POST` | `/api/UserAccessMaster/SaveAccessOROperationRights` | RightsMasterRequest |
 | `DELETE` | `/api/UserAccessMaster/DeleteAccessRightsDetail` | AccessRightId (query) |
 | `DELETE` | `/api/UserAccessMaster/DeleteOperationRightsDetail` | OperationRightId (query) |
 | `GET` | `/api/UserAccessMaster/GetUserAccessRightsList` | PropertyCode (query), UserCode (query), RoleId (query) |
-| `POST` | `/api/UserAccessMaster/InsertUserAccessRightsMaster` | array |
+| `POST` | `/api/UserAccessMaster/InsertUserAccessRightsMaster` | UserAccessRightsMaster[] |
 | `GET` | `/api/UserAccessMaster/GetUserOperationRightsList` | PropertyCode (query), UserCode (query), RoleId (query) |
-| `POST` | `/api/UserAccessMaster/InsertUserOperationRightsMaster` | array |
+| `POST` | `/api/UserAccessMaster/InsertUserOperationRightsMaster` | UserOperationRightsMaster[] |
 
 ### Master
 
 Hotel reference data and master record maintenance, including rooms, tariffs, companies, financial years, and taxes.
+
+The room detail and company tariff create and update routes take top-level JSON arrays. Use one request object per room or company tariff row. Other Master writes use the request shape listed below.
+
+For a room-detail update, send `roomDetailId` and the existing `oldRoomNo`, `oldRoomCode`, and `oldFloorCode` along with the requested values. For payment modes, `SaveMainandSubPaymentMode` creates a main mode or appends a submode to an existing main mode. There is no edit route for an existing mode. The submode list groups its `subModes` by `mainModeId`.
 
 | Method | Route | Request model or parameters |
 | --- | --- | --- |
@@ -82,8 +92,8 @@ Hotel reference data and master record maintenance, including rooms, tariffs, co
 | `PUT` | `/api/Master/UpdatePlanMasterDetail` | PlanMasterModel |
 | `DELETE` | `/api/Master/DeletePlanMasterDetail` | PlanId (query), PlanCode (query), PropertyCode (query) |
 | `GET` | `/api/Master/GetRoomDetailMasterList` | PropertyCode (query) |
-| `POST` | `/api/Master/CreateRoomDetailMasterDetail` | array |
-| `PUT` | `/api/Master/UpdateRoomDetailMasterDetail` | array |
+| `POST` | `/api/Master/CreateRoomDetailMasterDetail` | RoomDetailMasterRequestModel[] |
+| `PUT` | `/api/Master/UpdateRoomDetailMasterDetail` | RoomDetailMasterRequestModel[] |
 | `DELETE` | `/api/Master/DeleteRoomDetailMasterDetail` | RoomDetailId (query), RoomNo (query), RoomCode (query), FloorCode (query), PropertyCode (query) |
 | `GET` | `/api/Master/GetPurposeMasterList` | PropertyCode (query) |
 | `POST` | `/api/Master/CreatePurposeMasterDetail` | PurposeMasterModel |
@@ -111,8 +121,8 @@ Hotel reference data and master record maintenance, including rooms, tariffs, co
 | `PUT` | `/api/Master/UpdateCompanyMasterDetail` | CompanyMasterModel |
 | `DELETE` | `/api/Master/DeleteCompanyMasterDetail` | CompanyId (query), CompanyCode (query), PropertyCode (query) |
 | `GET` | `/api/Master/GetCompanyTraiffMasterList` | PropertyCode (query) |
-| `POST` | `/api/Master/CreateCompanyTraiffMasterDetail` | array |
-| `PUT` | `/api/Master/UpdateCompanyTraiffMasterDetail` | array |
+| `POST` | `/api/Master/CreateCompanyTraiffMasterDetail` | CompanyTraiffRequestModel[] |
+| `PUT` | `/api/Master/UpdateCompanyTraiffMasterDetail` | CompanyTraiffRequestModel[] |
 | `DELETE` | `/api/Master/DeleteCompanyTraiffMasterDetail` | CompanyTraiffId (query), RoomCode (query), CompanyCode (query), PropertyCode (query) |
 | `GET` | `/api/Master/GetRevenueMasterList` | PropertyCode (query) |
 | `POST` | `/api/Master/CreateRevenueMasterDetail` | RevenueMasterModel |
@@ -257,6 +267,17 @@ Send `propertyCode`, `checkInNo`, and `isForeignOrInterstateClient` in the JSON 
 
 Use this endpoint for an indicative room tariff and tax display. It uses the recorded tariff and scheduled stay dates, charging arrival through the night before departure, with one charge for a same-day stay. The estimate excludes discounts, extras, posted charges, advances, package and room-move adjustments, and legacy checkout-time rules. The frontend should keep settlement and final bill preview pending.
 
+### Dashboard
+
+| Method | Route | Request model or parameters |
+| --- | --- | --- |
+| `GET` | `/api/Dashboard/GetRoomStatusDashboard` | propertyCode (query, required, up to 5 characters) |
+| `GET` | `/api/Dashboard/GetScheduledRoomMovements` | propertyCode and businessDate (query, required) |
+
+Send a bearer token. The server uses its branch claim and the requested property to count active primary room records. HTTP 200 returns `totalRooms`, `occupiedRooms`, `vacantRooms`, `occupancyPercent`, and `statusCounts` in `data`. Each status row contains `statusCode` and `roomCount`. The backend counts `O` and `F` as occupied and `V` as vacant. Occupancy is occupied rooms divided by all active primary rooms, expressed as a percentage. An empty inventory returns zero totals and an empty `statusCounts` array.
+
+For scheduled movements, send `businessDate` as `YYYY-MM-DD`. HTTP 200 returns `businessDate`, `arrivals`, and `departures` in `data`. Arrival rows contain `reservationNo`, `roomCode`, and `roomCount` for confirmed, unconverted inventory. Departure rows contain `checkInNo` and `roomNo` for occupied rooms due out on the selected date. Lists are empty when no rows qualify. A missing date returns HTTP 400.
+
 ## HMS workflows pending APIs
 
-Checkout, bill preview and history, split bills, standalone settlement and advance operations, night audit, financial-year rollover, housekeeping, dashboards, report export, and backup administration have no dedicated routes in this snapshot. Keep these frontend integrations pending until their contracts are published.
+Checkout, bill preview and history, split bills, standalone settlement and advance operations, night audit, financial-year rollover, housekeeping, revenue dashboards, report export, and backup administration have no dedicated routes in this snapshot.

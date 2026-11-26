@@ -5,6 +5,114 @@
     "version": "1.0"
   },
   "paths": {
+    "/api/Billing/GetRoomChargeEstimate": {
+      "post": {
+        "tags": [
+          "Billing"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoomChargeEstimateRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoomChargeEstimateRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoomChargeEstimateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoomChargeEstimateDtoApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoomChargeEstimateDtoApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoomChargeEstimateDtoApiResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/CheckIn/GetActiveCheckInList": {
       "get": {
         "tags": [
@@ -79,7 +187,6 @@
           {
             "name": "checkInNo",
             "in": "query",
-            "required": true,
             "schema": {
               "type": "string"
             }
@@ -127,7 +234,24 @@
             }
           },
           "404": {
-            "description": "Not Found"
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       }
@@ -219,6 +343,177 @@
           },
           "403": {
             "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Dashboard/GetScheduledRoomMovements": {
+      "get": {
+        "tags": [
+          "Dashboard"
+        ],
+        "parameters": [
+          {
+            "name": "propertyCode",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "maxLength": 5,
+              "minLength": 0,
+              "type": "string"
+            }
+          },
+          {
+            "name": "businessDate",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduledRoomMovementsDtoApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduledRoomMovementsDtoApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduledRoomMovementsDtoApiResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Dashboard/GetRoomStatusDashboard": {
+      "get": {
+        "tags": [
+          "Dashboard"
+        ],
+        "parameters": [
+          {
+            "name": "propertyCode",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "maxLength": 5,
+              "minLength": 0,
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoomStatusDashboardDtoApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoomStatusDashboardDtoApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoomStatusDashboardDtoApiResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
             "content": {
               "text/plain": {
                 "schema": {
@@ -4789,44 +5084,6 @@
           }
         }
       }
-    },
-    "/api/Billing/GetRoomChargeEstimate": {
-      "post": {
-        "tags": [
-          "Billing"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RoomChargeEstimateRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RoomChargeEstimateDtoApiResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Active check-in not found"
-          }
-        }
-      }
     }
   },
   "components": {
@@ -6563,7 +6820,7 @@
             "nullable": true
           }
         },
-        "additionalProperties": {}
+        "additionalProperties": { }
       },
       "PurposeMasterModel": {
         "type": "object",
@@ -6957,6 +7214,101 @@
         },
         "additionalProperties": false
       },
+      "RoomChargeEstimateDto": {
+        "type": "object",
+        "properties": {
+          "checkInNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RoomChargeEstimateLine"
+            },
+            "nullable": true
+          },
+          "tariffTotal": {
+            "type": "number",
+            "format": "double"
+          },
+          "taxTotal": {
+            "type": "number",
+            "format": "double"
+          },
+          "estimatedTotal": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RoomChargeEstimateDtoApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/RoomChargeEstimateDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RoomChargeEstimateLine": {
+        "type": "object",
+        "properties": {
+          "roomNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "chargeDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "tariff": {
+            "type": "number",
+            "format": "double"
+          },
+          "tax": {
+            "type": "number",
+            "format": "double"
+          },
+          "total": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RoomChargeEstimateRequest": {
+        "required": [
+          "checkInNo",
+          "isForeignOrInterstateClient",
+          "propertyCode"
+        ],
+        "type": "object",
+        "properties": {
+          "propertyCode": {
+            "maxLength": 5,
+            "minLength": 0,
+            "type": "string"
+          },
+          "checkInNo": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "isForeignOrInterstateClient": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
       "RoomDetailMasterRequestModel": {
         "type": "object",
         "properties": {
@@ -7032,6 +7384,65 @@
           "oldFloorCode": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RoomStatusCountDto": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "roomCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RoomStatusDashboardDto": {
+        "type": "object",
+        "properties": {
+          "totalRooms": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "occupiedRooms": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vacantRooms": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "occupancyPercent": {
+            "type": "number",
+            "format": "double"
+          },
+          "statusCounts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RoomStatusCountDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RoomStatusDashboardDtoApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/RoomStatusDashboardDto"
           }
         },
         "additionalProperties": false
@@ -7159,6 +7570,78 @@
           "branchCode": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ScheduledArrivalDto": {
+        "type": "object",
+        "properties": {
+          "reservationNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "roomCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "roomCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ScheduledDepartureDto": {
+        "type": "object",
+        "properties": {
+          "checkInNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "roomNo": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ScheduledRoomMovementsDto": {
+        "type": "object",
+        "properties": {
+          "businessDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "arrivals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ScheduledArrivalDto"
+            },
+            "nullable": true
+          },
+          "departures": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ScheduledDepartureDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ScheduledRoomMovementsDtoApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/ScheduledRoomMovementsDto"
           }
         },
         "additionalProperties": false
@@ -7906,97 +8389,6 @@
           }
         },
         "additionalProperties": false
-      },
-      "RoomChargeEstimateRequest": {
-        "type": "object",
-        "properties": {
-          "propertyCode": {
-            "type": "string",
-            "maxLength": 5,
-            "minLength": 1
-          },
-          "checkInNo": {
-            "type": "string",
-            "maxLength": 100,
-            "minLength": 1
-          },
-          "isForeignOrInterstateClient": {
-            "type": "boolean"
-          }
-        },
-        "additionalProperties": false,
-        "required": [
-          "checkInNo",
-          "isForeignOrInterstateClient",
-          "propertyCode"
-        ]
-      },
-      "RoomChargeEstimateLine": {
-        "type": "object",
-        "properties": {
-          "roomNo": {
-            "type": "string"
-          },
-          "chargeDate": {
-            "type": "string",
-            "format": "date"
-          },
-          "tariff": {
-            "type": "number",
-            "format": "double"
-          },
-          "tax": {
-            "type": "number",
-            "format": "double"
-          },
-          "total": {
-            "type": "number",
-            "format": "double"
-          }
-        },
-        "additionalProperties": false
-      },
-      "RoomChargeEstimateDto": {
-        "type": "object",
-        "properties": {
-          "checkInNo": {
-            "type": "string"
-          },
-          "lines": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/RoomChargeEstimateLine"
-            }
-          },
-          "tariffTotal": {
-            "type": "number",
-            "format": "double"
-          },
-          "taxTotal": {
-            "type": "number",
-            "format": "double"
-          },
-          "estimatedTotal": {
-            "type": "number",
-            "format": "double"
-          }
-        },
-        "additionalProperties": false
-      },
-      "RoomChargeEstimateDtoApiResponse": {
-        "type": "object",
-        "properties": {
-          "success": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "$ref": "#/components/schemas/RoomChargeEstimateDto"
-          }
-        },
-        "additionalProperties": false
       }
     },
     "securitySchemes": {
@@ -8010,7 +8402,7 @@
   },
   "security": [
     {
-      "Bearer": []
+      "Bearer": [ ]
     }
   ]
 }
